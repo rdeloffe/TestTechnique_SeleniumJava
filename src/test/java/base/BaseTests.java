@@ -20,17 +20,20 @@ public class BaseTests {
     public void setUp(){
         System.setProperty("webdriver.chrome.driver","resources/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.get("https://hightest.nc/");
+        goHome()
         driver.manage().window().maximize();
-        homePage = new HomePage(driver);
+    }
+
+    @BeforeMethod
+    public void goHome(){
+        driver.get("https://hightest.nc/");
+        homePage = newHomePage(driver);
     }
 
     @AfterClass
     public void teadDown(){
         driver.quit();
     }
-
-
 
     public WindowManager getWindowsManager(){
         return new WindowManager(driver);
