@@ -12,18 +12,17 @@ import java.time.Duration;
 public class HomePage {
     private WebDriver driver;
 
+    private By toolbox = By.linkText("TOOLBOX");
+
     public HomePage(WebDriver driver){
         this.driver = driver;
     }
 
     public ToolboxPage cliquerSurToolbox() {
-        clickByTitle("TOOLBOX");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement toolboxClick = wait.until(ExpectedConditions.visibilityOfElementLocated(toolbox));
+        toolboxClick.click();
         return new ToolboxPage(driver);
-    }
-
-
-    public void clickByTitle(String titleText) {
-        driver.findElement(By.linkText(titleText)).click();
     }
 
 }
